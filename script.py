@@ -55,9 +55,8 @@ class TaskRecursiveDownload( HcKaineCommand ):
             return [], 0
 
         for entry in files:
-            file_type = "dir" if entry[ 'attribute' ] & self.FILE_ATTRIBUTE_DIRECTORY else "fil"
 
-            if file_type == 'fil':
+            if not entry[ 'is-directory' ]:
                 count_files += 1
 
                 _file_path = path
@@ -67,7 +66,7 @@ class TaskRecursiveDownload( HcKaineCommand ):
 
                 file_paths.append( _file_path )
 
-            if 'files' in entry and file_type == 'dir':
+            if 'files' in entry and entry[ 'is-directory' ]:
                 process_dir.append( entry )
 
         for entry in process_dir:
