@@ -31,10 +31,7 @@ class TaskRecursiveDownload( HcKaineCommand ):
             self.log_task( task_id, f'list directory files and folders: {args.path}' )
 
         try:
-            try:
-                directory, files = await task.result()
-            except Exception as e:
-                raise e
+            directory, files = await task.result()
         except Exception as e:
             self.log_error( f"({task_id}) failed to list directory \"{args.path}\": {e}" )
             return
